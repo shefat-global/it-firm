@@ -52,6 +52,10 @@ echo "=============================="
 
 IAM_ROLE=$(md $METADATA_URL/meta-data/iam/security-credentials/ || true)
 
+if [[ "$IAM_ROLE" == *"404 - Not Found"* || "$IAM_ROLE" == *"<html"* ]]; then
+  IAM_ROLE=""
+fi
+
 if [[ -n "$IAM_ROLE" ]]; then
   echo "IAM Role           : $IAM_ROLE"
   echo
